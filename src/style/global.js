@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Source Code Pro', sans-serif;
+    font-family: "Open Sans" sans-serif;
   }
 
   p {
