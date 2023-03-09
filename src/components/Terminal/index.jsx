@@ -1,5 +1,4 @@
 import * as S from './style'
-import { Text } from '../Text/index'
 import { useEffect, useState } from 'react'
 
 function AutomaticType({ text }) {
@@ -27,9 +26,9 @@ export function Terminal() {
   return (
     <>
       <S.Box>
-        <Text style={{ color: '#D1D5DA' }}>Compiling...</Text>
-        <AutomaticType text={messages[0]} />
-        <AutomaticType text={messages[1]} />
+        {messages.map((msg, index) => {
+          return <AutomaticType key={index} text={msg} />
+        })}
       </S.Box>
     </>
   )

@@ -1,45 +1,60 @@
 import * as S from './style'
-import { DiJavascript1, DiGit, DiRust, DiReact } from 'react-icons/di'
+import {
+  DiJavascript1,
+  DiGit,
+  DiRust,
+  DiReact,
+  DiNodejsSmall,
+  DiHtml5,
+  DiCss3
+} from 'react-icons/di'
 import { SiTypescript } from 'react-icons/si'
-import { useEffect, useState } from 'react'
+import { techs } from './data'
+import { Title } from '../Title'
+import { Text } from '../Text/style'
+import { ProgressBar } from '../Progress'
+
+const Icon = ({ component: Component, size, color, style }) => {
+  return <Component size={size} color={color} style={style} />
+}
 
 export function Skills() {
-  const [progress, setProgess] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (progress <= 100) {
-        setProgess((prog) => prog + 1)
-      }
-    }, 5)
-    return () => clearInterval(id)
-  }, [progress])
+  const icons = [
+    DiJavascript1,
+    SiTypescript,
+    DiHtml5,
+    DiCss3,
+    DiReact,
+    DiGit,
+    DiNodejsSmall,
+    DiRust
+  ]
 
   return (
-    <S.Section>
-      <S.SubTitle>Skills</S.SubTitle>
-      <S.Wrapper>
-        <S.Article>
-          <DiReact size={60} color="#1463f4" />
-          <S.ProgressBar max={100} value={progress - 40} />
-        </S.Article>
-        <S.Article>
-          <DiJavascript1 size={60} color="#F7DF1E" />
-          <S.ProgressBar max={100} value={progress - 30} />
-        </S.Article>
-        <S.Article>
-          <SiTypescript size={60} color="#007acc" style={{ padding: '10px' }} />
-          <S.ProgressBar max={100} value={progress - 40} />
-        </S.Article>
-        <S.Article>
-          <DiGit size={60} color="#F1502F" />
-          <S.ProgressBar max={100} value={progress - 30} />
-        </S.Article>
-        <S.Article>
-          <DiRust size={60} color="white" />
-          <S.ProgressBar max={100} value={progress - 70} />
-        </S.Article>
-      </S.Wrapper>
-    </S.Section>
+    <>
+      <Title
+        title="Technologies"
+        sub="List of my favorite tools and technologies"
+      />
+      <S.Section>
+        <S.Wrapper>
+          {icons &&
+            techs.map((tech, index) => (
+              <S.Article key={index}>
+                <Icon
+                  component={icons[index]}
+                  size={tech.size}
+                  color={tech.color}
+                  style={{ marginRight: '10px' }}
+                />
+                <S.Info>
+                  <Text style={{ fontSize: '1.7rem' }}>{tech.name}</Text>
+                  <ProgressBar techProgress={tech.progress} />
+                </S.Info>
+              </S.Article>
+            ))}
+        </S.Wrapper>
+      </S.Section>
+    </>
   )
 }

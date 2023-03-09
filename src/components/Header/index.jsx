@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Text } from '../Text'
+import * as S from './style'
+import { Terminal } from '../Terminal'
 import { Title } from '../Title'
-import { ProfileImg } from './style'
 
-export function Header() {
-  const [profile, setProfile] = useState({})
-
-  useEffect(() => {
-    getHitHubProfile()
-  }, [])
-
-  const getHitHubProfile = async () => {
-    const response = await fetch('https://api.github.com/users/vcarvalho0')
-    const result = await response.json()
-    setProfile(result)
-  }
+export function Header({ profile }) {
+  const messages = [
+    'Olá, meu nome é Vitor e tenho atualmente 20 anos de idade.',
+    'O objetivo deste site é servir como portfolio para que eu possa ir atualizando meus aprendizados e minhas habilidades.'
+  ]
 
   return (
     <>
-      <ProfileImg src={profile.avatar_url} alt="avatar" />
-      <Title>Hey, welcome to my portfolio</Title>
-      <Text>Here you can find some informations about me</Text>
+      <Terminal />
+      <Title title="Hey, welcome! 👋" />
+      <S.Wrapper>
+        <S.ProfileImg src={profile} alt="avatar" />
+        <S.Description>
+          {messages.map((msg, index) => (
+            <S.DescripText key={index}>{msg}</S.DescripText>
+          ))}
+        </S.Description>
+      </S.Wrapper>
     </>
   )
 }

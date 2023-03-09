@@ -9,7 +9,9 @@ const blink = keyframes`
 
 export const TextTerminal = styled.p`
   color: ${({ theme }) => theme.colors.white};
-  font-size: 1.9rem;
+  font-size: 1.8rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
 
   &::before {
     content: '~/projects🚀/vitor » ';
@@ -19,6 +21,14 @@ export const TextTerminal = styled.p`
   &::after {
     content: ${(props) => props.blink};
     animation: ${blink} 1s infinite;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 1.3rem;
   }
 `
 
@@ -32,12 +42,13 @@ export const Box = styled.div`
   flex-direction: column;
   padding: 15px;
   margin: 20px;
-  width: 700px;
+  width: 100%;
   height: 150px;
-  background-color: #192029;
-  border-radius: 15px;
+  background-color: #1a202c;
+  border: 1px solid #2d3748;
+  border-radius: 10px;
 
-  @media (max-width: 700px) {
-    width: 80%;
+  @media (max-width: 768px) {
+    width: 90%;
   }
 `
